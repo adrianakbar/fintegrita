@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FINTEGRITA — Financial Technology & Business Intelligence Platform</title>
+  <meta name="description" content="Infrastruktur finansial digital cerdas dan analitik multi-tenant untuk Koperasi, UMKM, dan Retail modern. Know Your Numbers, Grow Your Business.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#250543',
+              mid: '#630C66',
+              bright: '#BD1874',
+              light: '#DF2C8B',
+              surface: '#FDFBFE',
+              canvas: '#FFFFFF',
+              border: '#F0E6F5'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Rajdhani"', 'sans-serif'],
+          },
+          boxShadow: {
+            'glow': '0 10px 30px -10px rgba(189, 24, 116, 0.25)',
+            'glow-lg': '0 20px 40px -15px rgba(99, 12, 102, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .brand-gradient {
+      background: linear-gradient(135deg, #250543 0%, #630C66 40%, #BD1874 80%, #DF2C8B 100%);
+    }
+    .brand-gradient-text {
+      background: linear-gradient(135deg, #250543 0%, #630C66 45%, #BD1874 80%, #DF2C8B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-gradient-soft {
+      background: linear-gradient(135deg, rgba(37,5,67,0.03) 0%, rgba(99,12,102,0.06) 50%, rgba(189,24,116,0.05) 100%);
+    }
+    .grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(99, 12, 102, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99, 12, 102, 0.04) 1px, transparent 1px);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .animate-float-slow {
+      animation: float 6s ease-in-out infinite;
+    }
+    .animate-float-fast {
+      animation: float 4s ease-in-out infinite 1s;
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-brand-light selection:text-white">
+
+  <!-- SVG Global Definitions -->
+  <svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Brand Primary Gradient -->
+      <linearGradient id="fintegritaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#250543" />
+        <stop offset="35%" stop-color="#630C66" />
+        <stop offset="75%" stop-color="#BD1874" />
+        <stop offset="100%" stop-color="#DF2C8B" />
+      </linearGradient>
+      <!-- Soft Gradient for Highlights -->
+      <linearGradient id="fintegritaSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#BD1874" stop-opacity="0.15" />
+        <stop offset="100%" stop-color="#DF2C8B" stop-opacity="0.05" />
+      </linearGradient>
+      <!-- Glow Filter -->
+      <filter id="vectorGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo Lockup -->
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="images/logo-mark.png" alt="FINTEGRITA" class="w-12 h-12 object-contain transform transition-transform group-hover:scale-105 duration-300">
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-2xl tracking-wider brand-gradient-text uppercase leading-none">FINTEGRITA</span>
+          <span class="text-[9px] font-bold tracking-[0.14em] text-brand-mid uppercase mt-0.5">KNOW YOUR NUMBERS. GROW YOUR BUSINESS</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#solutions" class="hover:text-brand-bright transition-colors">Solutions</a>
+        <a href="#business-model" class="hover:text-brand-bright transition-colors">SaaS vs Agency</a>
+        <a href="#architecture" class="hover:text-brand-bright transition-colors">Architecture</a>
+        <a href="#calculator" class="hover:text-brand-bright transition-colors">ROI Calculator</a>
+        <a href="#team" class="hover:text-brand-bright transition-colors">Team</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-mid border border-brand-mid/30 rounded-lg hover:bg-brand-mid/5 transition-all">
+          Sign In
+        </a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-lg shadow-glow hover:shadow-glow-lg hover:brightness-110 transition-all">
+          <span>Book Demo</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Vector Rich Graphics -->
+  <section class="relative pt-12 pb-24 overflow-hidden grid-pattern">
+    <!-- Ambient 3D Fluid Waves Background -->
+    <div class="absolute -top-12 -right-12 w-[600px] h-[600px] opacity-25 pointer-events-none -z-10 mix-blend-multiply">
+      <img src="images/bg-waves-3d.png" alt="" class="w-full h-full object-contain filter blur-[1px]">
+    </div>
+    <!-- Ambient Background Blobs -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-brand-mid/10 via-brand-bright/10 to-brand-light/10 blur-3xl -z-10 rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Copy -->
+        <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-mid/20 bg-brand-surface text-brand-mid text-xs font-bold uppercase tracking-wider shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-brand-bright animate-ping"></span>
+            <span>Pembuatan Software & Pelatihan Akuntansi</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+            Know Your Numbers. <br>
+            <span class="brand-gradient-text">Grow Your Business.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            Sinergi <strong>rekayasa software keuangan modern</strong> dan <strong>pelatihan akuntansi profesional</strong> untuk Koperasi, UMKM, dan Lembaga Bisnis. Sistem pembukuan otomatis, kasir POS terintegrasi, serta pendampingan standar akuntansi (SAK ETAP / EMKM) berbasis AI.
+          </p>
+
+          <!-- Metrics Badges -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <div class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-lg text-xs font-semibold text-slate-700">
+              <i data-lucide="code-2" class="w-4 h-4 text-brand-bright"></i>
+              <span>Software Keuangan & POS</span>
+            </div>
+            <div class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-lg text-xs font-semibold text-slate-700">
+              <i data-lucide="graduation-cap" class="w-4 h-4 text-brand-mid"></i>
+              <span>Pelatihan Akuntansi & SAK</span>
+            </div>
+            <div class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200/80 rounded-lg text-xs font-semibold text-slate-700">
+              <i data-lucide="cpu" class="w-4 h-4 text-brand-light"></i>
+              <span>AI Business Intelligence</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white brand-gradient rounded-xl shadow-glow hover:shadow-glow-lg transition-all duration-300">
+              <span>Start Free Trial</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#solutions" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all">
+              <i data-lucide="play-circle" class="w-4 h-4 text-brand-bright"></i>
+              <span>Explore Platform</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Rich Hero 3D Graphic (Dashboard & Fintech Simulation) -->
+        <div class="lg:col-span-6 relative">
+          
+          <div class="relative mx-auto max-w-lg lg:max-w-none">
+            
+            <!-- Main 3D Frame -->
+            <div class="relative bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-2xl shadow-purple-900/10 backdrop-blur-xl">
+              
+              <!-- Dashboard Header bar -->
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 px-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                  <span class="ml-2 text-xs font-bold text-slate-400 font-mono">FINTEGRITA_CORE // NODE-01</span>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  99.9% UPTIME
+                </span>
+              </div>
+
+              <!-- High-Fidelity 3D Render -->
+              <div class="rounded-xl overflow-hidden bg-slate-50 border border-slate-100 shadow-inner">
+                <img src="images/hero-fintech-3d.png" alt="FINTEGRITA 3D Intelligence Dashboard" class="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-500">
+              </div>
+
+            </div>
+
+            <!-- Floating Vector Badge 1: Real-Time Fraud Prevention -->
+            <div class="absolute -bottom-6 -left-6 sm:-left-8 bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-xl flex items-center gap-3 animate-float-slow">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <i data-lucide="shield-alert" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Security Engine</p>
+                <p class="text-xs font-extrabold text-slate-800">Zero Fraud Detected</p>
+              </div>
+            </div>
+
+            <!-- Floating Vector Badge 2: Multi-Tenant Sync -->
+            <div class="absolute -top-6 -right-6 sm:-right-8 bg-white border border-slate-200/90 rounded-xl p-3.5 shadow-xl flex items-center gap-3 animate-float-fast">
+              <div class="w-10 h-10 rounded-lg bg-purple-50 text-brand-bright flex items-center justify-center">
+                <i data-lucide="cloud-lightning" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Sync Pipeline</p>
+                <p class="text-xs font-extrabold text-slate-800">Multi-Tenant Instant</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Business Model Shift (From the Uploaded Strategy Documents) -->
+  <section id="business-model" class="py-20 bg-slate-50/60 border-y border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <span class="text-xs font-extrabold tracking-widest text-brand-bright uppercase">STRATEGIC POSITIONING</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Bukan Sekadar Jasa IT. <br>
+          <span class="brand-gradient-text">Platform Produk Skalabel Masa Depan.</span>
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          Mengapa FINTEGRITA bertransformasi dari agensi pembuat software menjadi startup produk teknologi terstandarisasi dengan recurring revenue.
+        </p>
+      </div>
+
+      <!-- Vector Comparison Cards -->
+      <div class="grid md:grid-cols-2 gap-8 items-stretch">
+        
+        <!-- Old Model: Software House / Agensi -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-500">Model Konvensional</span>
+                <h3 class="text-xl font-bold text-slate-800">Software House / Konsultan IT</h3>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center">
+                <i data-lucide="x" class="w-5 h-5"></i>
+              </div>
+            </div>
+
+            <!-- Vector Diagram: Silo Data -->
+            <div class="my-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <svg class="w-full h-32" viewBox="0 0 400 120" fill="none">
+                <!-- Client 1 Silo -->
+                <rect x="20" y="30" width="90" height="60" rx="8" fill="#FFF" stroke="#CBD5E1" stroke-width="1.5" />
+                <text x="65" y="55" fill="#64748B" font-size="10" font-weight="700" text-anchor="middle">KOPERASI A</text>
+                <text x="65" y="72" fill="#94A3B8" font-size="9" text-anchor="middle">Rp 20 Juta (Putus)</text>
+                
+                <!-- Client 2 Silo -->
+                <rect x="155" y="30" width="90" height="60" rx="8" fill="#FFF" stroke="#CBD5E1" stroke-width="1.5" />
+                <text x="200" y="55" fill="#64748B" font-size="10" font-weight="700" text-anchor="middle">UMKM B</text>
+                <text x="200" y="72" fill="#94A3B8" font-size="9" text-anchor="middle">Silo Terisolasi</text>
+
+                <!-- Client 3 Silo -->
+                <rect x="290" y="30" width="90" height="60" rx="8" fill="#FFF" stroke="#CBD5E1" stroke-width="1.5" />
+                <text x="335" y="55" fill="#64748B" font-size="10" font-weight="700" text-anchor="middle">RETAIL C</text>
+                <text x="335" y="72" fill="#94A3B8" font-size="9" text-anchor="middle">Tanpa Integrasi</text>
+
+                <path d="M110 60 H 155" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="4 4" />
+                <path d="M245 60 H 290" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="4 4" />
+              </svg>
+            </div>
+
+            <!-- Bullet List -->
+            <ul class="space-y-3.5 text-sm text-slate-600">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="alert-circle" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                <span><strong>Pendapatan:</strong> Project-based flat sekali bayar, arus kas tidak stabil.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="alert-circle" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                <span><strong>Pertumbuhan:</strong> Terbatas seberapa banyak jumlah developer yang bisa lembur.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="alert-circle" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                <span><strong>Data & AI:</strong> Data terisolasi di masing-masing klien; AI hanya fitur kosmetik tempelan.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="alert-circle" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                <span><strong>Skala Pasar:</strong> Terbatas proyek lokal kustom.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
+            Kelemahan: Ketergantungan jam kerja orang, tidak scalable.
+          </div>
+        </div>
+
+        <!-- New Model: FINTEGRITA SaaS Platform -->
+        <div class="bg-white rounded-2xl border-2 border-brand-mid/40 p-8 shadow-glow relative overflow-hidden flex flex-col justify-between">
+          <div class="absolute top-0 right-0 bg-brand-gradient text-white text-[10px] font-extrabold uppercase tracking-widest px-3.5 py-1 rounded-bl-lg">
+            FINTEGRITA WAY
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-bright">Model Startup Teknologi</span>
+                <h3 class="text-xl font-bold text-slate-900">Multi-Tenant SaaS & Business Intelligence</h3>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-purple-50 text-brand-mid flex items-center justify-center">
+                <i data-lucide="check" class="w-5 h-5"></i>
+              </div>
+            </div>
+
+            <!-- Vector Diagram: Central Multi-tenant Platform -->
+            <div class="my-6 p-4 bg-brand-surface rounded-xl border border-brand-mid/10">
+              <svg class="w-full h-32" viewBox="0 0 400 120" fill="none">
+                <!-- Central Core Engine -->
+                <rect x="130" y="20" width="140" height="80" rx="10" fill="url(#fintegritaGrad)" />
+                <text x="200" y="52" fill="#FFFFFF" font-size="11" font-weight="800" text-anchor="middle">FINTEGRITA ENGINE</text>
+                <text x="200" y="68" fill="#FDFBFE" font-size="8" font-weight="600" opacity="0.9" text-anchor="middle">MULTI-TENANT CORE + AI</text>
+                <text x="200" y="82" fill="#DF2C8B" font-size="8" font-weight="700" text-anchor="middle">AGGREGATED INSIGHTS</text>
+
+                <!-- Tenants Left & Right -->
+                <circle cx="45" cy="40" r="20" fill="white" stroke="#630C66" stroke-width="1.5" />
+                <text x="45" y="43" fill="#250543" font-size="8" font-weight="800" text-anchor="middle">KOP 1</text>
+                
+                <circle cx="45" cy="85" r="20" fill="white" stroke="#630C66" stroke-width="1.5" />
+                <text x="45" y="88" fill="#250543" font-size="8" font-weight="800" text-anchor="middle">UMKM</text>
+
+                <circle cx="355" cy="40" r="20" fill="white" stroke="#BD1874" stroke-width="1.5" />
+                <text x="355" y="43" fill="#BD1874" font-size="8" font-weight="800" text-anchor="middle">RETAIL</text>
+
+                <circle cx="355" cy="85" r="20" fill="white" stroke="#BD1874" stroke-width="1.5" />
+                <text x="355" y="88" fill="#BD1874" font-size="8" font-weight="800" text-anchor="middle">KOP 2</text>
+
+                <!-- Connecting Pipelines -->
+                <path d="M65 40 L 130 50" stroke="#630C66" stroke-width="1.5" stroke-dasharray="3 3" />
+                <path d="M65 85 L 130 70" stroke="#630C66" stroke-width="1.5" stroke-dasharray="3 3" />
+                <path d="M270 50 L 335 40" stroke="#BD1874" stroke-width="1.5" stroke-dasharray="3 3" />
+                <path d="M270 70 L 335 85" stroke="#BD1874" stroke-width="1.5" stroke-dasharray="3 3" />
+              </svg>
+            </div>
+
+            <!-- Bullet List -->
+            <ul class="space-y-3.5 text-sm text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-bright shrink-0 mt-0.5"></i>
+                <span><strong>Pendapatan:</strong> Recurring Revenue berlangganan (SaaS), predictable & exponential.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-bright shrink-0 mt-0.5"></i>
+                <span><strong>Pertumbuhan:</strong> Skala ribuan koperasi & UMKM dari satu fondasi platform tunggal.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-bright shrink-0 mt-0.5"></i>
+                <span><strong>Data & AI:</strong> Benchmark industri agregat berizin resmi; AI tertanam di produk inti.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-bright shrink-0 mt-0.5"></i>
+                <span><strong>Ekspansi:</strong> Jangkauan nasional hingga regional tanpa restrukturisasi software ulang.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-bold text-brand-mid">
+            Keunggulan: Valuasi tinggi, efisiensi operasional maksimal, compound value.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Core Solutions (3 Pillars with Vector Visuals) -->
+  <section id="solutions" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-20">
+        <span class="text-xs font-extrabold tracking-widest text-brand-bright uppercase">SOLUSI TERPADU FINTEGRITA</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Software Cerdas & Edukasi Akuntansi
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          Mengatasi masalah finansial dari dua sisi sekaligus: menghadirkan software sistem pencatatan yang rapi dan membekali sumber daya manusia dengan pelatihan akuntansi berstandar resmi.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        
+        <!-- Pillar 1: Pembuatan Software Keuangan & Koperasi -->
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 hover:border-brand-mid/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <!-- 3D Render Illustration -->
+            <div class="w-20 h-20 rounded-2xl bg-brand-surface border border-brand-mid/10 p-2 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-sm">
+              <img src="images/module-koperasi-3d.png" alt="Pembuatan Software Keuangan & Koperasi" class="w-full h-full object-contain">
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Pembuatan Software Keuangan</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              Pengembangan platform core banking koperasi simpan pinjam, aplikasi kasir (POS), integrasi QRIS dinamis, hingga software keuangan custom berskala multi-tenant.
+            </p>
+
+            <!-- Vector Feature Schematic -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 mb-6">
+              <div class="flex items-center justify-between text-xs font-semibold text-slate-700 py-1">
+                <span>Core System Koperasi & POS</span>
+                <span class="text-brand-bright">Multi-Tenant</span>
+              </div>
+              <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden my-1">
+                <div class="bg-brand-mid h-full w-4/5 rounded-full"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                <span>Otomasi Simpan Pinjam</span>
+                <span>Standar SAK ETAP</span>
+              </div>
+            </div>
+
+            <ul class="space-y-2 text-xs font-semibold text-slate-700">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Sistem Simpan Pinjam & Approval Multilevel</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Kasir POS Multi-Outlet & QRIS Dinamis</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Development Custom Sesuai SOP Bisnis</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-mid uppercase tracking-wider">Solusi 01</span>
+            <a href="#contact" class="text-xs font-bold text-brand-bright hover:underline inline-flex items-center gap-1">
+              <span>Konsultasi Software</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Pelatihan & Pendampingan Akuntansi -->
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 hover:border-brand-mid/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <!-- 3D Render Illustration -->
+            <div class="w-20 h-20 rounded-2xl bg-brand-surface border border-brand-mid/10 p-2 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-sm">
+              <img src="images/module-training-3d.png" alt="Pelatihan & Sertifikasi Akuntansi" class="w-full h-full object-contain">
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Pelatihan & Pendampingan Akuntansi</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              Bimbingan teknis intensif akuntansi bagi pengurus, bendahara, dan staf operasional. Standarisasi pembukuan berbasis SAK ETAP dan SAK EMKM agar laporan siap diaudit.
+            </p>
+
+            <!-- Vector Feature Schematic -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 mb-6">
+              <div class="flex items-center justify-between text-xs font-semibold text-slate-700 py-1">
+                <span>Standar Pembukuan</span>
+                <span class="text-emerald-600 font-bold">SAK ETAP / EMKM</span>
+              </div>
+              <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden my-1">
+                <div class="bg-brand-bright h-full w-full rounded-full"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                <span>Bimbingan Tutup Buku & RAT</span>
+                <span>Sertifikasi Kasir</span>
+              </div>
+            </div>
+
+            <ul class="space-y-2 text-xs font-semibold text-slate-700">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Pelatihan Penyusunan Laporan Keuangan Neraca & L/R</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Simulasi Audit & Kesiapan Laporan Pertanggungjawaban (RAT)</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>SOP Kasir, Rekonsiliasi Bank, dan Arus Kas</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-mid uppercase tracking-wider">Solusi 02</span>
+            <a href="#contact" class="text-xs font-bold text-brand-bright hover:underline inline-flex items-center gap-1">
+              <span>Daftar Pelatihan</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pillar 3: AI-Driven Business Intelligence -->
+        <div class="bg-white rounded-2xl border-2 border-brand-mid/30 p-6 sm:p-8 shadow-glow hover:shadow-glow-lg transition-all duration-300 flex flex-col justify-between group relative">
+          <div class="absolute -top-3 right-6 bg-brand-bright text-white text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full tracking-wider">
+            CORE DIFFERENTIATOR
+          </div>
+
+          <div>
+            <!-- 3D Render Illustration -->
+            <div class="w-20 h-20 rounded-2xl bg-brand-surface border border-brand-mid/10 p-2 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-sm">
+              <img src="images/module-ai-3d.png" alt="AI Business Intelligence & Advisory" class="w-full h-full object-contain">
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 mb-3">AI Intelligence & Advisory</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              AI menganalisis data pembukuan untuk memberikan peringatan anomali (fraud), rekomendasi restrukturisasi pinjaman macet, dan credit scoring otomatis bagi anggota.
+            </p>
+
+            <!-- Vector Feature Schematic -->
+            <div class="p-3 bg-brand-surface rounded-xl border border-brand-mid/10 mb-6">
+              <div class="flex items-center justify-between text-xs font-semibold text-slate-800 py-1">
+                <span>Credit Scoring Engine</span>
+                <span class="text-brand-bright font-bold">Predictive AI</span>
+              </div>
+              <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden my-1">
+                <div class="bg-brand-gradient h-full w-11/12 rounded-full"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                <span>Deteksi Fraud Dini</span>
+                <span>Proyeksi Kas 90 Hari</span>
+              </div>
+            </div>
+
+            <ul class="space-y-2 text-xs font-semibold text-slate-700">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Credit Scoring Mandiri untuk Pengajuan Pinjaman</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Deteksi Dini Anomali Fraud Kasir & Kebocoran Kas</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-brand-bright"></i>
+                <span>Benchmark Rasio Kesehatan Koperasi & UMKM</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-mid uppercase tracking-wider">Solusi 03</span>
+            <a href="#contact" class="text-xs font-bold text-brand-bright hover:underline inline-flex items-center gap-1">
+              <span>View Specs</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Multi-Tenant Architecture & Enterprise Trust -->
+  <section id="architecture" class="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <!-- Grid on Dark -->
+    <div class="absolute inset-0 opacity-10" style="background-size: 40px 40px; background-image: linear-gradient(to right, #FFF 1px, transparent 1px), linear-gradient(to bottom, #FFF 1px, transparent 1px);"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <span class="text-xs font-extrabold tracking-widest text-brand-light uppercase">ENTERPRISE CLOUD & SECURITY</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Infrastruktur Cloud Multi-Tenant Terisolasi
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+          Kombinasi isolasi data perbankan, enkripsi end-to-end, dan pemrosesan AI terpusat untuk menjamin ketersediaan sistem tanpa kompromi keamanan.
+        </p>
+      </div>
+
+      <!-- 3D Isometric Architecture Render Showcase -->
+      <div class="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-4 sm:p-8 shadow-2xl shadow-purple-950/50 backdrop-blur-xl mb-12">
+        
+        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 relative group">
+          <img src="images/architecture-3d.png" alt="FINTEGRITA 3D Cloud Server Architecture" class="w-full h-auto object-cover transform group-hover:scale-[1.01] transition-transform duration-700">
+        </div>
+
+        <!-- 4 Spec Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 text-center">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Database Isolation</p>
+            <p class="text-sm font-extrabold text-white mt-1">Tenant Siloed DB</p>
+          </div>
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 text-center">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Uptime Reliability</p>
+            <p class="text-sm font-extrabold text-emerald-400 mt-1">99.9% High Availability</p>
+          </div>
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 text-center">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Data Transfer</p>
+            <p class="text-sm font-extrabold text-brand-light mt-1">TLS 1.3 / AES-256</p>
+          </div>
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 text-center">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">AI Compute Lane</p>
+            <p class="text-sm font-extrabold text-brand-bright mt-1">Predictive Hub</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trust & Compliance Banner with 3D Badge -->
+      <div class="bg-gradient-to-r from-brand-dark/90 via-brand-mid/80 to-brand-bright/70 border border-purple-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-glow">
+        <div class="flex items-center gap-5">
+          <img src="images/security-badge-3d.png" alt="Security Trust Badge" class="w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0 drop-shadow-lg">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-brand-light">STANDAR KEAMANAN & KEPATUHAN</span>
+            <h4 class="text-lg sm:text-xl font-bold text-white">Sesuai Standar Audit SAK ETAP & Regulasi Finansial</h4>
+            <p class="text-xs text-purple-200 mt-1">Data nasabah dan transaksi tersimpan aman dengan audit log tak terhapus (immutable audit trail).</p>
+          </div>
+        </div>
+        <a href="#contact" class="px-6 py-3 bg-white text-brand-dark text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-purple-50 transition-all shrink-0 shadow-md">
+          Verifikasi Kepatuhan
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Interactive Scaling ROI Calculator -->
+  <section id="calculator" class="py-20 bg-brand-surface border-b border-slate-200/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center space-y-3 mb-12">
+        <span class="text-xs font-extrabold tracking-widest text-brand-bright uppercase">VALUE ESTIMATOR</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Hitung Efisiensi Digital FINTEGRITA
+        </h2>
+        <p class="text-slate-600 text-sm">
+          Simulasikan penghematan biaya operasional dan akselerasi perputaran pinjaman unit usaha Anda.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-lg">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between items-center text-sm font-bold text-slate-800 mb-2">
+                <span>Jumlah Anggota / Pelanggan Aktif:</span>
+                <span id="memberCountText" class="text-brand-bright font-extrabold text-base">500 Orang</span>
+              </div>
+              <input id="memberSlider" type="range" min="100" max="10000" step="100" value="500" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-bright">
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center text-sm font-bold text-slate-800 mb-2">
+                <span>Perputaran Transaksi Bulanan:</span>
+                <span id="turnoverText" class="text-brand-bright font-extrabold text-base">Rp 250 Juta</span>
+              </div>
+              <input id="turnoverSlider" type="range" min="50" max="5000" step="50" value="250" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-bright">
+            </div>
+
+            <div class="p-4 bg-slate-50 rounded-xl text-xs text-slate-500 leading-relaxed">
+              *Dibandingkan biaya pembuatan aplikasi kustom konvensional (Rp 20-50 Juta di muka + biaya maintenance server sendiri per bulan).
+            </div>
+          </div>
+
+          <!-- Dynamic Output Card -->
+          <div class="bg-brand-surface rounded-xl border border-brand-mid/20 p-6 text-center space-y-4">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Estimasi Efisiensi Finansial</span>
+            <div class="space-y-1">
+              <p class="text-xs text-slate-500">Penghematan Jam Kerja Admin/Bulan</p>
+              <p id="timeSaved" class="text-3xl font-extrabold text-slate-900">120 Jam</p>
+            </div>
+            <div class="pt-3 border-t border-slate-200/80 space-y-1">
+              <p class="text-xs text-slate-500">Estimasi Peningkatan Profit Margin</p>
+              <p id="profitBoost" class="text-2xl font-extrabold text-brand-bright">+18.5%</p>
+            </div>
+            <a href="#contact" class="inline-block w-full py-3 px-4 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-lg shadow-glow hover:brightness-110 transition-all">
+              Klaim Penawaran Koperasi/UMKM
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Core Team & Leadership -->
+  <section id="team" class="py-24 bg-white border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-20">
+        <span class="text-xs font-extrabold tracking-widest text-brand-bright uppercase">LEADERSHIP & ADVISORS</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Tim Ahli di Balik FINTEGRITA
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          Kombinasi kompetensi rekayasa perangkat lunak skala enterprise, sains data analitik, dan pemahaman mendalam regulasi koperasi Indonesia.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Member 1 -->
+        <div class="group bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-brand-mid/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-5 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Adrian Akbar" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold text-white tracking-wide">Visionary Leader</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-bright">FOUNDER & CEO</span>
+              <h3 class="text-lg font-bold text-slate-900">Adrian Akbar R.</h3>
+              <p class="text-xs font-semibold text-slate-500">Fintech Strategist & Product Architect</p>
+            </div>
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Memimpin visi strategis platform, arsitektur multi-tenant, dan standarisasi tata kelola keuangan digital Koperasi & UMKM.
+            </p>
+          </div>
+          <div class="pt-4 mt-5 border-t border-slate-100 flex items-center gap-3 text-slate-400">
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="globe" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="group bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-brand-mid/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-5 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Yusril Maqoshidana" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold text-white tracking-wide">Infrastructure Core</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-mid">CO-FOUNDER & CTO</span>
+              <h3 class="text-lg font-bold text-slate-900">Yusril Maqoshidana</h3>
+              <p class="text-xs font-semibold text-slate-500">Cloud Infrastructure & Security</p>
+            </div>
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Arsitek ketahanan infrastruktur cloud, isolasi tenant tingkat tinggi, enkripsi data, dan orkestrasi sistem backend.
+            </p>
+          </div>
+          <div class="pt-4 mt-5 border-t border-slate-100 flex items-center gap-3 text-slate-400">
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="group bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-brand-mid/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-5 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Dian Prasetyo" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold text-white tracking-wide">Machine Learning</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-light">HEAD OF AI & BI</span>
+              <h3 class="text-lg font-bold text-slate-900">Dian Prasetyo, M.Kom</h3>
+              <p class="text-xs font-semibold text-slate-500">Predictive Modeling & Risk Analytics</p>
+            </div>
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Mengembangkan model machine learning penilaian risiko kredit anggota, deteksi anomali fraud, dan forecasting arus kas.
+            </p>
+          </div>
+          <div class="pt-4 mt-5 border-t border-slate-100 flex items-center gap-3 text-slate-400">
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="group bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-brand-mid/40 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-5 bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Siti Rahmawati" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold text-white tracking-wide">Regulatory & Growth</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600">HEAD OF PARTNERSHIPS</span>
+              <h3 class="text-lg font-bold text-slate-900">Siti Rahmawati, S.E.</h3>
+              <p class="text-xs font-semibold text-slate-500">Koperasi & SAK ETAP Compliance</p>
+            </div>
+            <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+              Menangani standardisasi akuntansi koperasi, kepatuhan audit regulasi Kemenkop, dan kemitraan jaringan asosiasi usaha.
+            </p>
+          </div>
+          <div class="pt-4 mt-5 border-t border-slate-100 flex items-center gap-3 text-slate-400">
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="hover:text-brand-bright transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Contact & Demo Booking Form -->
+  <section id="contact" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12">
+        
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-xs font-extrabold tracking-widest text-brand-bright uppercase">GET IN TOUCH</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Mulai Transformasi Digital Finansial Anda Hari Ini.
+          </h2>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Tim konsultan dan product specialist kami siap mendemonstrasikan implementasi sistem FINTEGRITA pada ekosistem koperasi maupun jaringan retail Anda.
+          </p>
+
+          <div class="space-y-4 pt-4">
+            <div class="flex items-center gap-3.5 text-sm text-slate-700">
+              <div class="w-10 h-10 rounded-lg bg-brand-surface border border-brand-mid/10 flex items-center justify-center text-brand-mid">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400 font-semibold">Email Kemitraan</p>
+                <p class="font-bold">partnership@fintegrita.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3.5 text-sm text-slate-700">
+              <div class="w-10 h-10 rounded-lg bg-brand-surface border border-brand-mid/10 flex items-center justify-center text-brand-mid">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400 font-semibold">WhatsApp Direct</p>
+                <p class="font-bold">+62 851-7225-2910</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3.5 text-sm text-slate-700">
+              <div class="w-10 h-10 rounded-lg bg-brand-surface border border-brand-mid/10 flex items-center justify-center text-brand-mid">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400 font-semibold">Headquarter</p>
+                <p class="font-bold">Indonesia Tech Hub</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-xl">
+            <form onsubmit="event.preventDefault(); alert('Terima kasih! Permintaan demo FINTEGRITA Anda telah diterima. Tim kami akan menghubungi via WhatsApp/Email dalam 1x24 jam.');" class="space-y-5">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Lengkap</label>
+                  <input type="text" required placeholder="Contoh: Adrian Akbar" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nomor WhatsApp</label>
+                  <input type="tel" required placeholder="0851-xxxx-xxxx" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Layanan yang Dibutuhkan</label>
+                  <select class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none bg-white transition-all">
+                    <option>Paket Bundling (Software + Pelatihan Akuntansi)</option>
+                    <option>Pembuatan Software Core Koperasi</option>
+                    <option>Software Kasir POS & QRIS Dinamis</option>
+                    <option>Pelatihan & Bimtek Akuntansi (SAK ETAP/EMKM)</option>
+                    <option>Pendampingan Tutup Buku & RAT</option>
+                    <option>Custom Software Development</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Usaha / Lembaga</label>
+                  <input type="text" required placeholder="Contoh: KSP Arraudhoh" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Kebutuhan Utama</label>
+                <textarea rows="3" placeholder="Tuliskan tantangan pencatatan keuangan, kasir, atau simpan pinjam yang ingin diotomasi..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-xl shadow-glow hover:shadow-glow-lg transition-all">
+                Kirim Permintaan Demo & Proposal
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800">
+        
+        <div class="flex items-center gap-3">
+          <img src="images/logo-mark.png" alt="FINTEGRITA" class="w-9 h-9 object-contain">
+          <span class="font-display font-bold text-xl text-white tracking-wider">FINTEGRITA</span>
+        </div>
+
+        <p class="text-center md:text-right">
+          &copy; 2026 FINTEGRITA Technologies. All rights reserved. <br>
+          <span class="text-slate-500">Empowering Cooperatives & MSMEs with Intelligent Financial Systems.</span>
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between pt-6 text-[11px] text-slate-500">
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-white">Privacy Policy</a>
+          <a href="#" class="hover:text-white">Terms of Service</a>
+          <a href="#" class="hover:text-white">Security Compliance</a>
+        </div>
+        <p>Built with Vector Precision & Next-Gen Scalability.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Calculator Script
+    const memberSlider = document.getElementById('memberSlider');
+    const turnoverSlider = document.getElementById('turnoverSlider');
+    const memberCountText = document.getElementById('memberCountText');
+    const turnoverText = document.getElementById('turnoverText');
+    const timeSaved = document.getElementById('timeSaved');
+    const profitBoost = document.getElementById('profitBoost');
+
+    function updateCalculator() {
+      const members = parseInt(memberSlider.value);
+      const turnover = parseInt(turnoverSlider.value);
+
+      memberCountText.innerText = members.toLocaleString('id-ID') + ' Orang';
+      turnoverText.innerText = 'Rp ' + turnover.toLocaleString('id-ID') + ' Juta';
+
+      // Calculations
+      const hours = Math.round(members * 0.2 + 20);
+      const boost = (12 + (turnover / 500) * 1.5).toFixed(1);
+
+      timeSaved.innerText = hours + ' Jam';
+      profitBoost.innerText = '+' + boost + '%';
+    }
+
+    memberSlider.addEventListener('input', updateCalculator);
+    turnoverSlider.addEventListener('input', updateCalculator);
+    updateCalculator();
+  </script>
+
+</body>
+</html>
