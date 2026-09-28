@@ -978,22 +978,22 @@
 
         <div class="lg:col-span-7">
           <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-xl">
-            <form onsubmit="event.preventDefault(); alert('Terima kasih! Permintaan demo FINTEGRITA Anda telah diterima. Tim kami akan menghubungi via WhatsApp/Email dalam 1x24 jam.');" class="space-y-5">
+            <form id="demoForm" onsubmit="handleDemoSubmit(event)" class="space-y-5">
               <div class="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Lengkap</label>
-                  <input type="text" required placeholder="Contoh: Adrian Akbar" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
+                  <input id="demoName" type="text" required placeholder="Contoh: Adrian Akbar" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nomor WhatsApp</label>
-                  <input type="tel" required placeholder="0823-xxxx-xxxx" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
+                  <input id="demoPhone" type="tel" required placeholder="0823-xxxx-xxxx" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
                 </div>
               </div>
 
               <div class="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Layanan yang Dibutuhkan</label>
-                  <select class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none bg-white transition-all">
+                  <select id="demoService" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none bg-white transition-all">
                     <option>Pengembangan Website Profil Lembaga / Instansi</option>
                     <option>Portal Web & Sistem Informasi Lembaga</option>
                     <option>Paket Bundling (Website + Software Keuangan)</option>
@@ -1006,17 +1006,18 @@
                 </div>
                 <div>
                   <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Usaha / Lembaga</label>
-                  <input type="text" required placeholder="Contoh: KSP Arraudhoh" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
+                  <input id="demoOrg" type="text" required placeholder="Contoh: KSP Arraudhoh" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all">
                 </div>
               </div>
 
               <div>
                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Kebutuhan Utama</label>
-                <textarea rows="3" placeholder="Tuliskan tantangan pencatatan keuangan, kasir, atau simpan pinjam yang ingin diotomasi..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all"></textarea>
+                <textarea id="demoNotes" rows="3" placeholder="Tuliskan tantangan pencatatan keuangan, kasir, atau simpan pinjam yang ingin diotomasi..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/20 outline-none transition-all"></textarea>
               </div>
 
-              <button type="submit" class="w-full py-4 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-xl shadow-glow hover:shadow-glow-lg transition-all">
-                Kirim Permintaan Demo & Proposal
+              <button type="submit" class="w-full py-4 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-xl shadow-glow hover:shadow-glow-lg transition-all flex items-center justify-center gap-2">
+                <span>Kirim Permintaan Demo via WhatsApp</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
               </button>
             </form>
           </div>
@@ -1057,6 +1058,26 @@
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
+
+    function handleDemoSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('demoName').value.trim();
+      const phone = document.getElementById('demoPhone').value.trim();
+      const service = document.getElementById('demoService').value;
+      const org = document.getElementById('demoOrg').value.trim();
+      const notes = document.getElementById('demoNotes').value.trim();
+
+      const text = `Halo FINTEGRITA, saya ingin mengajukan permintaan demo & proposal:
+
+• Nama: ${name}
+• WhatsApp: ${phone}
+• Lembaga/Usaha: ${org}
+• Layanan: ${service}
+• Kebutuhan: ${notes || '-'}`;
+
+      const waUrl = 'https://wa.me/6282372087771?text=' + encodeURIComponent(text);
+      window.open(waUrl, '_blank');
+    }
   </script>
 
 </body>
