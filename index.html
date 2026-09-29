@@ -160,11 +160,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo Lockup -->
-      <a href="#" class="flex items-center gap-3 group">
-        <img src="images/logo-mark.png" alt="FINTEGRITA" class="w-12 h-12 object-contain transform transition-transform group-hover:scale-105 duration-300">
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+        <img src="images/logo-mark.png" alt="FINTEGRITA" class="w-10 h-10 sm:w-12 sm:h-12 object-contain transform transition-transform group-hover:scale-105 duration-300">
         <div class="flex flex-col">
-          <span class="font-display font-bold text-2xl tracking-wider brand-gradient-text uppercase leading-none">FINTEGRITA</span>
-          <span class="text-[9px] font-bold tracking-[0.14em] text-brand-mid uppercase mt-0.5">KNOW YOUR NUMBERS. GROW YOUR BUSINESS</span>
+          <span class="font-display font-bold text-xl sm:text-2xl tracking-wider brand-gradient-text uppercase leading-none">FINTEGRITA</span>
+          <span class="text-[8px] sm:text-[9px] font-bold tracking-[0.1em] sm:tracking-[0.14em] text-brand-mid uppercase mt-0.5 truncate max-w-[170px] sm:max-w-none">KNOW YOUR NUMBERS. GROW YOUR BUSINESS</span>
         </div>
       </a>
 
@@ -177,9 +177,44 @@
         <a href="#team" class="hover:text-brand-bright transition-colors">Team</a>
       </nav>
 
-      <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
-        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-lg shadow-glow hover:shadow-glow-lg hover:brightness-110 transition-all">
+      <!-- Action Buttons & Mobile Hamburger -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="#contact" class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-lg shadow-glow hover:shadow-glow-lg hover:brightness-110 transition-all">
+          <span>Book Demo</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" aria-label="Toggle Navigation Menu" class="md:hidden p-2 rounded-lg text-slate-700 hover:text-brand-bright hover:bg-purple-50 transition-colors focus:outline-none">
+          <i id="menuIcon" data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer / Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg px-4 pt-3 pb-6 space-y-1 shadow-2xl transition-all duration-300">
+      <a href="#solutions" class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-50 hover:text-brand-bright transition-colors">
+        <span>Solutions</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="#architecture" class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-50 hover:text-brand-bright transition-colors">
+        <span>Architecture</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="#portfolio" class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-50 hover:text-brand-bright transition-colors">
+        <span>Portfolio</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="#faq" class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-50 hover:text-brand-bright transition-colors">
+        <span>FAQ</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="#team" class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-50 hover:text-brand-bright transition-colors">
+        <span>Team</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <div class="pt-3">
+        <a href="#contact" class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3 text-xs font-bold uppercase tracking-wider text-white brand-gradient rounded-xl shadow-glow">
           <span>Book Demo</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
@@ -1139,10 +1174,63 @@
     </div>
   </footer>
 
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" aria-label="Scroll to top" class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full brand-gradient text-white shadow-glow hover:shadow-glow-lg flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-4 hover:scale-110 active:scale-95 border border-white/20">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
   <!-- Scripts -->
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
+
+    // Mobile Hamburger Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isClosed = mobileMenu.classList.contains('hidden');
+        if (isClosed) {
+          mobileMenu.classList.remove('hidden');
+          menuIcon.setAttribute('data-lucide', 'x');
+        } else {
+          mobileMenu.classList.add('hidden');
+          menuIcon.setAttribute('data-lucide', 'menu');
+        }
+        lucide.createIcons();
+      });
+
+      // Close mobile menu on clicking any navigation link
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          if (menuIcon) {
+            menuIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+          }
+        });
+      });
+    }
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+          backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+        } else {
+          backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+          backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+        }
+      });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
     function handleDemoSubmit(e) {
       e.preventDefault();
