@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://fintegrita.my.id/</loc>
+    <loc>https://fintegrita.com/</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://fintegrita.my.id/#services</loc>
+    <loc>https://fintegrita.com/#services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fintegrita.my.id/#portfolio</loc>
+    <loc>https://fintegrita.com/#portfolio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fintegrita.my.id/#team</loc>
+    <loc>https://fintegrita.com/#team</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fintegrita.my.id/#faq</loc>
+    <loc>https://fintegrita.com/#faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fintegrita.my.id/#contact</loc>
+    <loc>https://fintegrita.com/#contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
